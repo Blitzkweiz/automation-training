@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage extends AbstractPage {
-	private final String BASE_URL = "https://www.cars.booking.com/";
+	private final String BASE_URL = "https://www.booking.com//cars/";
 	private final Logger logger = LogManager.getRootLogger();
 
 	@FindBy(className = "user_firstname")

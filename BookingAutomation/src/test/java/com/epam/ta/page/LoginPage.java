@@ -2,6 +2,7 @@ package com.epam.ta.page;
 
 import com.epam.ta.model.PageError;
 import com.epam.ta.model.User;
+import com.google.gson.annotations.Until;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -10,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,9 +26,6 @@ public class LoginPage extends AbstractPage
 
 	@FindBy(id = "password-error")
 	private WebElement incorrectPasswordInput;
-
-	@FindBy(id = "username-error")
-	private WebElement notRegisteredEmailInput;
 
 	public LoginPage(WebDriver driver)
 	{
@@ -70,6 +70,8 @@ public class LoginPage extends AbstractPage
 	}
 
 	public boolean checkNotRegisteredEmailMessage(PageError error){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebElement notRegisteredEmailInput = driver.findElement(By.id("username-error"));
 		return notRegisteredEmailInput.isDisplayed()
 				&& notRegisteredEmailInput.getText()
 				.contains(error.getErrorDescription());

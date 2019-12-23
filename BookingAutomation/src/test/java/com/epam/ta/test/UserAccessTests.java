@@ -5,6 +5,8 @@ import com.epam.ta.model.User;
 import com.epam.ta.page.LoginPage;
 import com.epam.ta.service.PageErrorCreator;
 import com.epam.ta.service.UserCreator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,6 +16,9 @@ import static org.hamcrest.Matchers.is;
 
 
 public class UserAccessTests extends CommonConditions {
+
+	private final Logger logger = LogManager.getRootLogger();
+
 	@Test(testName = "testcase 1 : One can login Booking")
 	public void loginBookingTest()
 	{
