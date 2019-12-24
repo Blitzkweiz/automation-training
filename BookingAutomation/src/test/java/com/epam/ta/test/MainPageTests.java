@@ -19,6 +19,7 @@ public class MainPageTests extends CommonConditions{
     private static final String TESTDATA_CASE_5_PICK_UP_LOCATION = "testdata.case5.pick.up.location";
     private static final String TESTDATA_CASE_6_LANGUAGE_NAME = "testdata.case6.language.name";
     private static final String TESTDATA_CASE_7_PICK_UP_LOCATION = "testdata.case7.pick.up.location";
+    private static final String TESTDATA_CASE_8_NOT_AVAILABLE_LOCATION = "testdata.case8.not.available.location";
 
     @Test(testName = "testcase 5 : incorrect pick up location input")
     public void incorrectPickUpLocationTest()
@@ -43,5 +44,14 @@ public class MainPageTests extends CommonConditions{
         MainPage page = new MainPage(driver);
         SearchResultPage searchResultPage = page.openPage().inputCorrectPickUpLocation(TestDataReader.getTestData(TESTDATA_CASE_7_PICK_UP_LOCATION));
         Assert.assertEquals(TestDataReader.getTestData(TESTDATA_CASE_7_PICK_UP_LOCATION), searchResultPage.getResultPickUpCity());
+    }
+
+    @Test(testName = "testcase 8 : no car available")
+    public void carNotAvailableTest()
+    {
+        MainPage page = new MainPage(driver);
+        SearchResultPage searchResultPage = page.openPage().inputCorrectPickUpLocation(TestDataReader.getTestData(TESTDATA_CASE_8_NOT_AVAILABLE_LOCATION));
+        PageError expectedError = PageErrorCreator.notAvailableLocationError();
+        Assert.assertTrue(searchResultPage.checkNotAvailableLocationMessage(expectedError));
     }
 }

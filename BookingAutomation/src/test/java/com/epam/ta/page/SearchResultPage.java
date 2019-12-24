@@ -1,11 +1,15 @@
 package com.epam.ta.page;
 
+import com.epam.ta.model.PageError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.concurrent.TimeUnit;
 
 public class SearchResultPage extends AbstractPage {
 
@@ -52,5 +56,14 @@ public class SearchResultPage extends AbstractPage {
     public String getResultPickUpCity()
     {
         return resultPickUpCity.getText();
+    }
+
+    public boolean checkNotAvailableLocationMessage(PageError error){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement errorMessage = driver.findElement(By.xpath("//*[@id=\"backMoreCarsForm\"]/div[2]/h1"));
+        logger.info(errorMessage.getText());
+        return errorMessage.isDisplayed()
+                && errorMessage.getText()
+                .contains(error.getErrorDescription());
     }
 }
