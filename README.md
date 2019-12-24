@@ -1,1 +1,1 @@
-# automation-training
+# automation-training repository
