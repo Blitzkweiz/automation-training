@@ -21,6 +21,9 @@ public class SearchResultPage extends AbstractPage {
     @FindBy(className = "rch-icon")
     private WebElement currentCurrency;
 
+    @FindBy(className = "ab-SearchSummary_PickUp_City")
+    private WebElement resultPickUpCity;
+
     public SearchResultPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
@@ -44,5 +47,10 @@ public class SearchResultPage extends AbstractPage {
     public String getCurrentCurrency()
     {
         return currentCurrency.getText();
+    }
+
+    public String getResultPickUpCity()
+    {
+        return resultPickUpCity.getText();
     }
 }
